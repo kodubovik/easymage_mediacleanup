@@ -1,0 +1,163 @@
+<?xml version="1.0"?>
+<!--
+/**
+* EasyMage_MediaCleanup
+*
+* NOTICE OF LICENSE
+*
+* This source file is subject to the Open Software License (OSL 3.0)
+* that is bundled with this package in the file LICENSE.txt.
+* It is also available through the world-wide-web at this URL:
+* http://opensource.org/licenses/osl-3.0.php
+* If you did not receive a copy of the license and are unable to
+* obtain it through the world-wide-web, please send an email
+* to license@magentocommerce.com so you can be sent a copy immediately.
+*
+* Original code copyright (c) 2006-2016 X.commerce, Inc. (http://www.magento.com)
+*
+* @package    EasyMage_MediaCleanup
+* @author     Konstantin Dubovik
+* @contact    kodubovik@gmail.com
+* @license    http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
+*/
+-->
+<config>
+    <tabs>
+        <easymage_tab translate="label" module="easymage_mediacleanup">
+            <label>EasyMage</label>
+            <sort_order>1</sort_order>
+        </easymage_tab>
+    </tabs>
+    <sections>
+        <mediacleanup_options translate="label" module="easymage_mediacleanup">
+            <label>Media Cleanup</label>
+            <tab>easymage_tab</tab>
+            <frontend_type>text</frontend_type>
+            <sort_order>1</sort_order>
+            <show_in_default>1</show_in_default>
+            <show_in_website>1</show_in_website>
+            <show_in_store>1</show_in_store>
+            <groups>
+                <general translate="label comment">
+                    <label>General</label>
+                    <sort_order>0</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+                    <fields>
+                        <enable translate="label comment">
+                            <label>Enable</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>10</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </enable>
+                        <extensions translate="label comment">
+                            <label>Image extensions</label>
+                            <comment><![CDATA[List images extentions delimited by comma.</br><em>E.g. png, jpeg, gif</em>]]></comment>
+                            <depends>
+                                <enable>1</enable>
+                            </depends>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>20</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </extensions>
+                        <img_dir>
+                            <label>Image directory</label>
+                            <comment><![CDATA[Relative path to your image directory.</br><em>E.g. '/media/catalog/product'</em>]]></comment>
+                            <depends>
+                                <enable>1</enable>
+                            </depends>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>30</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </img_dir>
+                        <skip_cache translate="label">
+                            <label>Skip cached images</label>
+                            <comment>Set to 'yes' if you want cached images not to be removed</comment>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>40</sort_order>
+                            <depends>
+                                <enable>1</enable>
+                            </depends>
+                            <depends><enable>1</enable></depends>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </skip_cache>
+                        <enable_cron translate="label">
+                            <label>Enable Media Cleanup via cron</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>50</sort_order>
+                            <depends><enable>1</enable></depends>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </enable_cron>
+                        <cron_exp translate="label">
+                            <label>Cron Expression</label>
+                            <frontend_type>text</frontend_type>
+                            <comment>Schedule Media Cleanup via cron</comment>
+                            <sort_order>60</sort_order>
+                            <depends><enable_cron>1</enable_cron></depends>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </cron_exp>
+                        <enabled_email translate="label">
+                            <label>Enable email notification</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>70</sort_order>
+                            <depends><enable>1</enable></depends>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </enabled_email>
+                        <email translate="label comment">
+                            <label>Email Address</label>
+                            <comment>Media Cleanup report will be sent to this email</comment>
+                            <depends>
+                                <enabled_email>1</enabled_email>
+                            </depends>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>80</sort_order>
+                            <validate>validate-email</validate>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </email>
+                        <dry_run translate="label">
+                            <comment>Before doing cleanup try dry run to see what files will be affected by your action</comment>
+                            <frontend_type>button</frontend_type>
+                            <frontend_model>easymage_mediacleanup/adminhtml_system_config_form_dryrun</frontend_model>
+                            <sort_order>90</sort_order>
+                            <depends><enable>1</enable></depends>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </dry_run>
+                        <run_now translate="label">
+                            <comment>Run cleanup now</comment>
+                            <frontend_type>button</frontend_type>
+                            <frontend_model>easymage_mediacleanup/adminhtml_system_config_form_cleanup</frontend_model>
+                            <sort_order>100</sort_order>
+                            <depends><enable>1</enable></depends>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </run_now>
+                    </fields>
+                </general>
+            </groups>
+        </mediacleanup_options>
+    </sections>
+</config>

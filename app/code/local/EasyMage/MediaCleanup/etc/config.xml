@@ -1,0 +1,83 @@
+<?xml version="1.0"?>
+<!--
+/**
+* EasyMage_MediaCleanup
+*
+* NOTICE OF LICENSE
+*
+* This source file is subject to the Open Software License (OSL 3.0)
+* that is bundled with this package in the file LICENSE.txt.
+* It is also available through the world-wide-web at this URL:
+* http://opensource.org/licenses/osl-3.0.php
+* If you did not receive a copy of the license and are unable to
+* obtain it through the world-wide-web, please send an email
+* to license@magentocommerce.com so you can be sent a copy immediately.
+*
+* Original code copyright (c) 2006-2016 X.commerce, Inc. (http://www.magento.com)
+*
+* @package    EasyMage_MediaCleanup
+* @author     Konstantin Dubovik
+* @contact    kodubovik@gmail.com
+* @license    http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
+*/
+-->
+<config>
+    <modules>
+        <EasyMage_MediaCleanup>
+            <version>0.1.0</version>
+        </EasyMage_MediaCleanup>
+    </modules>
+    <global>
+        <models>
+            <easymage_mediacleanup>
+                <class>EasyMage_MediaCleanup_Model</class>
+            </easymage_mediacleanup>
+        </models>
+        <blocks>
+            <easymage_mediacleanup>
+                <class>EasyMage_MediaCleanup_Block</class>
+            </easymage_mediacleanup>
+        </blocks>
+        <helpers>
+            <easymage_mediacleanup>
+                <class>EasyMage_MediaCleanup_Helper</class>
+            </easymage_mediacleanup>
+        </helpers>
+    </global>
+    <crontab>
+        <jobs>
+            <media_cleanup>
+                <schedule>
+                    <config_path>mediacleanup_options/general/cron_exp</config_path>
+                </schedule>
+                <run>
+                    <model>easymage_mediacleanup/cleanup::runcron</model>
+                </run>
+            </media_cleanup>
+        </jobs>
+    </crontab>
+    <admin>
+        <routers>
+            <adminhtml>
+                <args>
+                    <modules>
+                        <EasyMage_MediaCleanup before="Mage_Adminhtml">EasyMage_MediaCleanup_Adminhtml</EasyMage_MediaCleanup>
+                    </modules>
+                </args>
+            </adminhtml>
+        </routers>
+    </admin>
+    <default>
+        <mediacleanup_options>
+            <general>
+                <enable>1</enable>
+                <extensions>png, jpeg, gif</extensions>
+                <img_dir>/media/catalog/product</img_dir>
+                <skip_cache>1</skip_cache>
+                <enable_cron>0</enable_cron>
+                <cron_exp>0 0 * * *</cron_exp>
+                <enabled_email>0</enabled_email>
+            </general>
+        </mediacleanup_options>
+    </default>
+</config>
